@@ -27,11 +27,18 @@ def ultra():
        signalon = utime.ticks_us()
    timepassed = signalon - signaloff
    distance = (timepassed * 0.0343) / 2
-   output = "Object detected!",distance,"cm"
-   print(output)
-   lcd.putstr("Object detected!")
-   lcd.move_to(2,1)
-   lcd.putstr("%s cm" % distance)
+   if distance > 30:
+       output = "No Object Detected!"
+       print(output)
+       lcd.putstr("No Object")
+       lcd.move_to(0,1)
+       lcd.putstr("Detected")
+   else:
+       output = "Object detected!",distance,"cm"
+       print(output)
+       lcd.putstr("Object detected!")
+       lcd.move_to(2,1)
+       lcd.putstr("%s cm" % distance)
 while True:
    ultra()
    utime.sleep(5)
